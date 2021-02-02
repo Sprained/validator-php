@@ -1,0 +1,15 @@
+{
+    "name": "sprained/validator-php",
+    "authors": [
+        {
+            "name": "Gabriel Resende",
+            "email": "gabriel.almeida.resende@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Sprained\\": "src"
+        }
+    }
+}
