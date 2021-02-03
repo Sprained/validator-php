@@ -6,9 +6,9 @@ class Validator
 {
     private function error($erro)
     {
-        header("HTTP/1.0 400 Bad Request");
-        echo $erro;
-        die();
+        http_response_code(400);
+        echo json_encode(['message' => $erro]);
+        die;
     }
 
     public function required($char, $campo)
