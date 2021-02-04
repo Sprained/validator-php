@@ -80,4 +80,17 @@ class ValidatorTest extends TestCase //comentar o die() na função de erro para
         $this->assertEquals(400, http_response_code());
         $this->expectOutputString(json_encode(['message' => 'O campo Num deve conter apenas números!']));
     }
+
+    public function testCep()
+    {
+        $validator = new Validator();
+
+        //Teste cep valido
+        $this->assertEquals('51021020', $validator->cep('510210-20'));
+
+        //Teste cep invalido
+        $validator->cep('510210-200');
+        $this->assertEquals(400, http_response_code());
+        $this->expectOutputString(json_encode(['message' => 'O campo CEP deve conter, no máximo, 8 caracteres!']));
+    }
 }

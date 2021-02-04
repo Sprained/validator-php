@@ -70,4 +70,11 @@ class Validator
         
         return trim($char);
     }
+
+    public function cep($cep)
+    {
+        if($this->count(8, 8, 'CEP', preg_replace('/[^0-9]/', null, $cep))) {
+            return preg_replace('/[^0-9]/', null, $cep);
+        }
+    }
 }

@@ -66,6 +66,12 @@ $email = $validator->email($_POST['email']);
 $num = $validator->num($_POST['num'], 'Num');
 
 /*
+    Cep: verifica se o valor preenchido segue padrão CEP, e remove o hífen retornando apenas os números
+    Primeiro parâmetro: valor a ser analisado
+*/
+$cep = $validator->cep($_POST['cep']);
+
+/*
 
 Resultado de erro:
 
