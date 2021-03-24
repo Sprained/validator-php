@@ -43,8 +43,31 @@ class Validator
 
     public function password($pass)
     {
-        if($this->required($pass, 'Senha')) {
-            return md5($this->count(6, null,  "Senha", $pass));
+        if(!preg_match('@[A-Z]@', $pass)) {
+            $this->error("Senha deve conter no minimo uma letra maiúscula!");
+        } else if(!preg_match('@[a-z]@', $pass)) {
+            $this->error("Senha deve conter no minimo uma letra minúscula!");
+        } else if(!preg_match('@[0-9]@', $pass)) {
+            $this->error("Senha deve conter letras e números!");
+        } else if(!preg_match('@[^\w]@', $pass)) {
+            $this->error("Senha deve conter no minimo caractere especial!");
+        } else if($this->required($pass, 'Senha')) {
+            return base64_encode(hash_hmac('sha256', $this->count(6, null,  "Senha", $pass), KEY, true));
+        }
+    }
+
+    public function confirm_password($pas, $confirm_pass) {
+        if($pas !== $confirm_pass) {
+            $this->error("Senhas devem ser iguais!");
+        }
+    }
+
+    public function compare_cript_password($pass, $cript_pass)
+    {
+        if(base64_encode(hash_hmac('sha256', $pass, KEY, true)) !== $cript_pass) {
+            return false;
+        } else {
+            return true;
         }
     }
 

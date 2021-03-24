@@ -47,10 +47,28 @@ $required = $validator->required($_POST['required'], 'Required');
 $count = $validator->count('10', '10', 'Count', $_POST['count']);
 
 /*
-    Password: verifica se o valor preenchido está vazio, caso não, será retornado o valor informado criptografado em md5
+    Password: verifica se o valor preenchido está vazio, caso não, será retornado o valor informado criptografado em sha256 e base64
+    Necessario configurar um define com nome KEY e um valor para criptografar a senha
+    EX: define("KEY", "teste");
     Primeiro parâmetro: valor a ser analisado
 */
 $password = $validator->password($_POST['password']);
+
+/*
+    confirm_password: verifica se senha e confirmação da senha informados são identicoas
+    Primeiro parâmetro: Senha a ser comparada
+    Segundo parâmetro: Confirmação da senha
+*/
+$confirm_password = $validator->confirm_password($_POST['password'], $_POST['confirm_password']);
+
+/*
+    compare_cript_password: verifica se senha informada e a senha criptografada salva são identicas
+    Necessario configurar um define com nome KEY e um valor para criptografar a senha
+    EX: define("KEY", "teste");
+    Primeiro parâmetro: Senha a ser comparada
+    Segundo parâmetro: Senha criptografada
+*/
+$compare_cript_password = $validator->compare_cript_password($_POST['password'], $cript_password);
 
 /*
     Email: verifica se o valor informado tem o formato padrão de e-mail
